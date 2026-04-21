@@ -72,7 +72,7 @@ public class AuthService {
 
         log.info("Kullanıcı başarıyla giriş yaptı: {}", request.username());
 
-        var accessToken = jwtService.generateToken(user.getUsername());
+        var accessToken = jwtService.generateToken(user);
 
         revokeAllUserTokens(user);
 
@@ -91,7 +91,7 @@ public class AuthService {
             var user =  userRepository.findByUsername(username).orElseThrow();
 
             if(jwtService.isTokenValid(refreshToken, user)) {
-                var accessToken = jwtService.generateToken(user.getUsername());
+                var accessToken = jwtService.generateToken(user);
 
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);

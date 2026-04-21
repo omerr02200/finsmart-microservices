@@ -1,5 +1,6 @@
 package com.finsmart.authservice.services;
 
+import com.finsmart.authservice.entities.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "fin-smart-cok-gizli-anahtar-buraya-gelecek-cok-uzun-olmasi-lazim";
+    private static final String SECRET_KEY = "fin-smart-cok-gizli-ve-guclu-bir-anahtar-kelime-buraya-cok-daha-uzun-olmalı";
     private static final long  jwtExpiration = 86400000; // 24 saat
 
     public String extractUsername(String token) {
@@ -49,9 +50,14 @@ public class JwtService {
                 .getBody();
     }
 
-    public String generateToken(String username) {
+    public String generateToken(User user) {
+
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("userId", user.getId());
+
         return Jwts.builder()
-                .setSubject(username)
+                .setClaims(extraClaims)
+                .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)

@@ -22,6 +22,8 @@
 
     <modules>
         <module>auth-service</module>
+        <module>api-gateway</module>
+        <module>finance-service</module>
     </modules>
 
 </project>

@@ -4,7 +4,7 @@ services:
     image: postgres:16-alpine
     container_name: finsmart-postgres
     environment:
-      POSTGRES_DB: finance_db
+      POSTGRES_DB: finsmart_db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
     ports:
