@@ -3,6 +3,7 @@ package com.finsmart.authservice.controller;
 import com.finsmart.authservice.dto.AuthResponse;
 import com.finsmart.authservice.dto.LoginRequest;
 import com.finsmart.authservice.dto.RegisterRequest;
+import com.finsmart.authservice.repositories.UserRepository;
 import com.finsmart.authservice.services.AuthService;
 import com.finsmart.authservice.services.RedisService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import java.io.IOException;
 public class AuthController {
     private final AuthService authService;
     private final RedisService redisService;
+    private final UserRepository userRepository;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@Valid @RequestBody RegisterRequest request){
@@ -44,5 +46,10 @@ public class AuthController {
     @PostMapping("/refresh-token")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         authService.refreshToken(request,response);
+    }
+
+    @GetMapping("/users/exists/{id}")
+    public ResponseEntity<Boolean> checkUserExists(@PathVariable("id") Long id){
+        return ResponseEntity.ok(userRepository.existsById(id));
     }
 }

@@ -2,6 +2,7 @@ package com.finsmart.apigateway.filter;
 
 import com.finsmart.apigateway.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class AuthenticationFilter extends AbstractGatewayFilterFactory<AuthenticationFilter.Config> {
     private final JwtUtils jwtUtils;
+
+    @Value("${gateway.secret}")
+    private String gatewaySecret;
 
     public AuthenticationFilter(JwtUtils jwtUtils) {
         super(Config.class);
@@ -34,7 +38,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
 
                     userId = claims.get("userId").toString();
 
-                    // exchange.getRequest().mutate().header("X-User-Id", userId).build();
                 } catch (Exception e) {
                     throw new RuntimeException("Geçersiz Token");
                 }
@@ -44,6 +47,7 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                 return chain.filter(exchange.mutate()
                         .request(exchange.getRequest().mutate()
                                 .header("X-User-Id", userId)
+                                .header("X-Gateway-Secret", gatewaySecret)
                                 .build())
                         .build());
             }

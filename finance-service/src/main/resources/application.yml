@@ -19,6 +19,20 @@ spring:
     baseline-on-migrate: true
     fail-on-missing-locations: true
 
+  main:
+    allow-bean-definition-overriding: true
+
 logging:
   level:
     org.springframework.web: DEBUG
+
+gateway:
+  secret: finsmart-cok-gizli-arka-kapi-anahtari
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+  httpClient:
+    enabled: true
