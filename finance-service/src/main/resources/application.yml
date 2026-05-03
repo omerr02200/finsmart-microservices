@@ -22,6 +22,29 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+      properties:
+        spring.json.add.type.headers: false
+
+    consumer:
+      group-id: finance-group-v2
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: "com.finsmart.financeservice.dto.event"
+        spring.json.value.default.type: "com.finsmart.financeservice.dto.event.TransactionCreatedEvent"
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    default-property-inclusion: non_null
+
 logging:
   level:
     org.springframework.web: DEBUG
