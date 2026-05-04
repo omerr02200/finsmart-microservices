@@ -24,6 +24,7 @@
         <module>auth-service</module>
         <module>api-gateway</module>
         <module>finance-service</module>
+        <module>analysis-service</module>
     </modules>
 
 </project>
