@@ -32,7 +32,7 @@ spring:
         spring.json.add.type.headers: false
 
     consumer:
-      group-id: finance-group-v2
+      group-id: finance-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
