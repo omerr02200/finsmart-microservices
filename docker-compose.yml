@@ -35,5 +35,14 @@ services:
     ports:
       - "9092:9092"
 
+  kafka-ui:
+    image: kafbat/kafka-ui:latest
+    container_name: kafka-ui
+    ports:
+      - "8085:8080"
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=finsmart-kafka:29092
+
 volumes:
   postgres_data:

@@ -1,4 +1,4 @@
-package com.finsmart.analysisservice.dto.event;
+package com.finsmart.aiservice.dto.event;
 
 import java.math.BigDecimal;
 

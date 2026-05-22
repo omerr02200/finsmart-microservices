@@ -1,10 +1,12 @@
 package com.finsmart.financeservice.entities;
 
+import com.finsmart.financeservice.dto.TransactionRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "transactions")
@@ -41,4 +43,5 @@ public class Transaction {
     {
         this.createdAt = LocalDateTime.now();
     }
+
 }

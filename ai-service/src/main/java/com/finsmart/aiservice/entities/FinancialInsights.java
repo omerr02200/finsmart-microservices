@@ -11,18 +11,19 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-public class FinancalInsights {
+@Table(name = "financial_insight")
+public class FinancialInsights {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String userId;
+    private String category;
+    private BigDecimal totalAmount;
 
     @Column(columnDefinition = "TEXT")
     private String advice;
 
-    private BigDecimal relevantAmount;
-
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

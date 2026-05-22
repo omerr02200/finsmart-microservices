@@ -4,7 +4,6 @@ import com.finsmart.financeservice.dto.TransactionRequest;
 import com.finsmart.financeservice.entities.Transaction;
 import com.finsmart.financeservice.entities.TransactionType;
 import com.finsmart.financeservice.exception.InvalidCredentialsException;
-import com.finsmart.financeservice.exception.UserNotFoundException;
 import com.finsmart.financeservice.repositories.TransactionRepository;
 import com.finsmart.financeservice.services.TransactionService;
 import jakarta.validation.Valid;

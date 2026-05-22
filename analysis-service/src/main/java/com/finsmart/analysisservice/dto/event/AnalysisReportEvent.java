@@ -1,4 +1,12 @@
 package com.finsmart.analysisservice.dto.event;
 
-public record AnalysisReportEvent() {
+import java.math.BigDecimal;
+
+public record AnalysisReportEvent (
+        String userId,
+        String category,
+        BigDecimal totalAmount,
+        String analysisDetail
+) {
+
 }
